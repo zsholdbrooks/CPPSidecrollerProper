@@ -3,21 +3,12 @@
 #include <SFML/Graphics.hpp>
 #include <ctime>
 #include <cstdlib>
+#include "coreGameOperations.h"
 
 //#define KEY_PRESSED 
 #define SINGLE_KEY_REP 1
 
-void setSprite(sf::Sprite *spriteToMove, float x, float y) {
-    (*spriteToMove).setPosition(x, y);
-    return;
-}
 
-void moveSprite(sf::Sprite* spriteToMove, float x, float y) {
-    (*spriteToMove).move(x, y);
-    return;
-}
-
-// This is the main C++ program- Duh!
 // It is where our game starts from
 int main()
 {

@@ -21,6 +21,9 @@
     <ClCompile Include="CPPSidescrollerProper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="coreGameOperations.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="openal32.dll">
@@ -66,5 +69,10 @@
     <Image Include="ModestAttemptx4.png">
       <Filter>Resource Files</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="coreGameOperations.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
