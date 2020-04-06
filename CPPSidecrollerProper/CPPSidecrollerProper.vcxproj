@@ -26,7 +26,13 @@
     <ClCompile Include="CPPSidescrollerProper.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="bottom.png" />
+    <Image Include="Floor6.png" />
+    <Image Include="Floor8.png" />
     <Image Include="ModestAttemptx4.png" />
+    <Image Include="ModestAttemptx4small.png" />
+    <Image Include="TexturedFloor6.png" />
+    <Image Include="top.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="openal32.dll" />

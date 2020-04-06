@@ -22,7 +22,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="coreGameOperations.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -69,10 +69,28 @@
     <Image Include="ModestAttemptx4.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Floor6.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Floor8.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="TexturedFloor6.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ModestAttemptx4small.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="bottom.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="top.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="coreGameOperations.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
