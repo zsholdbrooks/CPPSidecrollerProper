@@ -42,3 +42,12 @@ void moveSprite(sf::Sprite* spriteToMove, float x, float y) {
     (*spriteToMove).move(x, y);
     return;
 }
+
+PauseMenu::PauseMenu() {
+    Instance = 0;
+}
+
+PauseMenu* PauseMenu::getMenu() {
+    if (!Instance) Instance = new PauseMenu();
+    return Instance;
+}

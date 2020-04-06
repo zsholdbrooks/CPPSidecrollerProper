@@ -22,7 +22,18 @@ private:
 	sf::Image imageObj;
 };
 
+class PauseMenu final {
+public:
+	PauseMenu* getMenu();
 
+
+private:
+	PauseMenu();
+	~PauseMenu() {};
+	static PauseMenu *Instance;
+	//static PauseMenu *Instance = new PauseMenu();
+
+};
 
 void setSprite(sf::Sprite* spriteToMove, float x, float y);
 
