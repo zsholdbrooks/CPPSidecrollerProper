@@ -7,6 +7,8 @@ class TransparentSprite {
 public:
 	TransparentSprite();
 	TransparentSprite(std::string fileName);
+	TransparentSprite(std::string hair, std::string head,
+		std::string shirt, std::string pants, std::string shoes);
 
 	~TransparentSprite();
 
@@ -15,11 +17,11 @@ public:
 
 private:
 
-	sf::Sprite spriteObj;
+	sf::Sprite *spriteObj;
 
-	sf::Texture textureObj;
+	sf::Texture *textureObj;
 
-	sf::Image imageObj;
+	sf::Image *imageObj;
 };
 
 class PauseMenu final {
