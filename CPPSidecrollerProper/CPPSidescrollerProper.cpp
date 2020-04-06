@@ -79,8 +79,8 @@ int main()
 
 
     // Start Composite creation here
-    sf::RenderTexture comp;
-    if (!comp.create(40, 133)) {
+    sf::RenderTexture *comp = new sf::RenderTexture;
+    if (!(*comp).create(40, 133)) {
         return -1;
     }
     sf::Texture *tImg = new sf::Texture;
@@ -94,12 +94,12 @@ int main()
     (*bImg).loadFromImage(*tempImg);
     sf::Sprite *bSprite = new sf::Sprite(*bImg);
 
-    comp.clear();
-    comp.draw(*bSprite);
-    comp.draw(*tSprite);
-    comp.display();
+    (*comp).clear();
+    (*comp).draw(*bSprite);
+    (*comp).draw(*tSprite);
+    (*comp).display();
     
-    sf::Image newTempImg(comp.getTexture().copyToImage());
+    sf::Image newTempImg((*comp).getTexture().copyToImage());
     newTempImg.createMaskFromColor(sf::Color(255, 255, 255), 0);
     
     sf::Texture transCompText;
@@ -107,6 +107,7 @@ int main()
     sf::Sprite compSprite(transCompText);
     delete tSprite;
     delete tImg;
+    delete comp;
 
     // End composite creation here
 
