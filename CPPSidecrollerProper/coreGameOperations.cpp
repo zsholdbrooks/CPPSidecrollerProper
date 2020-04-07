@@ -4,10 +4,15 @@
 
 
 TransparentSprite::TransparentSprite() {
-
+    this->imageObj = 0;
+    this->textureObj = 0;
+    this->spriteObj = 0;
 }
 
 TransparentSprite::TransparentSprite(std::string fileName) {
+    imageObj = new sf::Image;
+    textureObj = new sf::Texture;
+    spriteObj = new sf::Sprite;
     (*(this->imageObj)).loadFromFile(fileName);
     (*(this->imageObj)).createMaskFromColor(sf::Color(255, 255, 255), 0);
 
@@ -94,7 +99,14 @@ TransparentSprite::TransparentSprite(std::string hair, std::string head, std::st
 }
 
 TransparentSprite::~TransparentSprite() {
+    delete this->spriteObj;
+    delete this->textureObj;
+    delete this->imageObj;
+}
 
+sf::Sprite *TransparentSprite::getSprite()
+{
+    return spriteObj;
 }
 
 void TransparentSprite::loadNewTransparentTexture(std::string fileName) {
@@ -121,11 +133,31 @@ void moveSprite(sf::Sprite* spriteToMove, float x, float y) {
     return;
 }
 
+//  Pause Menu
+
+PauseMenu* PauseMenu::Instance = nullptr;
+
 PauseMenu::PauseMenu() {
-    Instance = 0;
 }
 
-PauseMenu* PauseMenu::getMenu() {
-    if (!Instance) Instance = new PauseMenu();
-    return Instance;
+
+
+
+PauseMenu& PauseMenu::getMenu() {
+    if (!Instance) { Instance = new PauseMenu(); }
+    return *Instance;
+}
+
+int PauseMenu::startMenu(sf::RenderWindow *window) {
+    sf::Event menuEvent;
+
+    while (window->isOpen()) {
+        while (window->pollEvent(menuEvent)) {
+
+
+        }
+
+        window->display();
+    }
+    return -1;
 }

@@ -2,6 +2,7 @@
 #define COREGAMEOPERATIONS_HEADER
 
 #include <SFML/Graphics.hpp>
+//#include <vector>
 
 class TransparentSprite {
 public:
@@ -12,6 +13,7 @@ public:
 
 	~TransparentSprite();
 
+	sf::Sprite *getSprite();
 	void loadNewTransparentTexture(std::string fileName);
 	bool intersection(sf::Sprite otherSprite);
 
@@ -24,16 +26,34 @@ private:
 	sf::Image *imageObj;
 };
 
+class LevelBackground {
+public:
+	LevelBackground();
+	LevelBackground(std::string baseFile);
+	~LevelBackground();
+
+	void move(float x);
+	void draw(sf::RenderWindow window);
+private:
+	std::vector<TransparentSprite*> floorBackground;
+	std::vector<TransparentSprite*> wallBackground;
+	std::string baseTileFileName;
+
+	//Derived classes can change how new tile rows are added allowing downtown
+	virtual void appendTileRow();
+	
+};
+
+
 class PauseMenu final {
 public:
-	PauseMenu* getMenu();
-
+	static PauseMenu& getMenu();
+	int startMenu(sf::RenderWindow *window);
 
 private:
 	PauseMenu();
 	~PauseMenu() {};
 	static PauseMenu *Instance;
-	//static PauseMenu *Instance = new PauseMenu();
 
 };
 

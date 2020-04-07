@@ -30,27 +30,25 @@ int main()
     int LShift = 1;
     // Make a window that is 800 by 200 pixels
     // And has the title "Hello from SFML"
-    sf::RenderWindow window(sf::VideoMode(1280, 720), "Hello from SFML");
+    sf::RenderWindow window(sf::VideoMode(1280, 720), "CPP Sidescroller");
 
     sf::Sprite transDude;
     sf::Image dudeImg;
     sf::Texture transText;
-/*
-    dudeImg.loadFromFile("ModestAttemptx4.png");
-    
-    dudeImg.createMaskFromColor(sf::Color(255, 255, 255), 0);
-    transText.loadFromImage(dudeImg);
-    transDude.setTexture(transText);*/
+
     createTransparentSprite(&transDude, &dudeImg, &transText, "ModestAttemptx4.png");
     transDude.setPosition(400, 300);
 
-    sf::Sprite floor;
+    /*sf::Sprite floor;
     sf::Texture *floorPic = new sf::Texture;
     if (!(*floorPic).loadFromFile("TexturedFloor650.png")) {
         return -1;
     }
     floor.setTexture(*floorPic);
-    floor.setPosition(100, 0);
+    floor.setPosition(100, 0);*/
+    TransparentSprite floor("TexturedFloor650.png");
+    floor.getSprite()->setPosition(-600, 160); //620 width pic, 60 width tile
+    //1280/60
     //delete floorPic;
     sf::Sprite dude;
     sf::Texture dudePic;
@@ -60,24 +58,25 @@ int main()
     dude.setTexture(dudePic);
     dude.setPosition(300, 300);
 
-    //Multi layer dude
-    /*sf::RenderTexture comp;
-    if (!comp.create(40, 133)) {
-        return -1;
-    }
-    sf::Texture tImg;
-    tImg.loadFromFile("top.png");
-    sf::Sprite tSprite(tImg);
-    sf::Texture bImg;
-    bImg.loadFromFile("bottom.png");
-    sf::Sprite bSprite(bImg);
+    // Text
+    sf::Text newMessage;
+    sf::Font textFont;
+    textFont.loadFromFile("unispace.ttf");
+    newMessage.setFont(textFont);
+    newMessage.setString("Quit to Menu");
+    newMessage.setCharacterSize(30);
+    newMessage.setFillColor(sf::Color::Red);
+    newMessage.setOrigin(130, 15);
+    newMessage.setPosition(400, 400);
 
-    comp.clear();
-    comp.draw(bSprite);
-    comp.draw(tSprite);
-    comp.display();*/
-
-
+    sf::RectangleShape outerRect;
+    outerRect.setOrigin(150, 30);
+    outerRect.setSize(sf::Vector2f(300, 60));
+    outerRect.setFillColor(sf::Color(150, 150, 150, 255));
+    outerRect.setOutlineColor(sf::Color::Black);
+    outerRect.setOutlineThickness(5);
+    outerRect.setPosition(400, 400);
+    
     // Start Composite creation here
     sf::RenderTexture *comp = new sf::RenderTexture;
     if (!(*comp).create(40, 133)) {
@@ -244,10 +243,12 @@ while (window.isOpen())
         window.clear(sf::Color(100, 100, 100));
 
         // Draw our message
-        window.draw(floor);
+        window.draw(*floor.getSprite());
         window.draw(dude);
         window.draw(transDude);
         window.draw(compSprite);
+        window.draw(outerRect);
+        window.draw(newMessage);
 
         
         // Draw our game scene here
