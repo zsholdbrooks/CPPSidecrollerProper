@@ -9,7 +9,9 @@ TransparentSprite::TransparentSprite() {
     this->spriteObj = 0;
 }
 
-TransparentSprite::TransparentSprite(std::string fileName) {
+TransparentSprite::TransparentSprite(std::string fileName) : TransparentSprite(fileName, 0, 0) {}
+
+TransparentSprite::TransparentSprite(std::string fileName, float originX, float originY) {
     imageObj = new sf::Image;
     textureObj = new sf::Texture;
     spriteObj = new sf::Sprite;
@@ -18,6 +20,9 @@ TransparentSprite::TransparentSprite(std::string fileName) {
 
     (*(this->textureObj)).loadFromImage(*(this->imageObj));
     (*(this->spriteObj)).setTexture(*(this->textureObj));
+    if (originX || originY) {
+        this->spriteObj->setOrigin(originX, originY);
+    }
 }
 
 TransparentSprite::TransparentSprite(std::string hair, std::string head, std::string shirt, std::string pants, std::string shoes) {
@@ -160,4 +165,43 @@ int PauseMenu::startMenu(sf::RenderWindow *window) {
         window->display();
     }
     return -1;
+}
+
+// LevelBackground
+
+LevelBackground::LevelBackground()
+{
+}
+
+LevelBackground::LevelBackground(std::string baseFile) {
+    for (int i = 0; i < 33; i++) {
+        this->floorBackground.push_back(new TransparentSprite(baseFile, 600, -160));
+        (floorBackground[i]->getSprite())->setPosition(i * 59.0, 0.0);
+    }
+}
+
+LevelBackground::~LevelBackground()
+{
+}
+
+// Positive number moves object right across screen
+
+void LevelBackground::move(float x, float wrapDelimiter) {
+    for (int i = 0; i < this->floorBackground.size(); i++) {
+        floorBackground[i]->getSprite()->move(x, 0.0);
+        if (floorBackground[i]->getSprite()->getPosition().x < wrapDelimiter) {
+            appendTileRow(i);
+        }
+    }
+    //floorBackground[0]->getSprite()->get
+}
+
+void LevelBackground::draw(sf::RenderWindow& window) {
+    for (int i = 0; i < this->floorBackground.size(); i++) {
+        window.draw(*(floorBackground[i]->getSprite()));
+    }
+}
+
+void LevelBackground::appendTileRow(int index) {
+    floorBackground[index]->getSprite()->move(1888.0, 0.0);//1829
 }

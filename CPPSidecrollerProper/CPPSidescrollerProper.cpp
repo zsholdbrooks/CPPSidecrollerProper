@@ -47,8 +47,10 @@ int main()
     floor.setTexture(*floorPic);
     floor.setPosition(100, 0);*/
     TransparentSprite floor("TexturedFloor650.png");
-    floor.getSprite()->setPosition(-600, 160); //620 width pic, 60 width tile
+    floor.getSprite()->setPosition(-620, 160); //620 width pic, 60 width tile
     //1280/60
+    
+    LevelBackground backing("TexturedFloor650.png");
     //delete floorPic;
     sf::Sprite dude;
     sf::Texture dudePic;
@@ -238,17 +240,19 @@ while (window.isOpen())
     }
         // Clear everything from the last run of the while loop
         //window.clear();
+    backing.move(-displacement*2 * deltaTime, 59 * -0);
         window.draw(message);
 
         window.clear(sf::Color(100, 100, 100));
 
         // Draw our message
-        window.draw(*floor.getSprite());
-        window.draw(dude);
+        //window.draw(*floor.getSprite());
+        backing.draw(window);
+        //window.draw(dude);
         window.draw(transDude);
         window.draw(compSprite);
-        window.draw(outerRect);
-        window.draw(newMessage);
+        //window.draw(outerRect);
+        //window.draw(newMessage);
 
         
         // Draw our game scene here

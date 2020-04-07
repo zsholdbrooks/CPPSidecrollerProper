@@ -8,6 +8,7 @@ class TransparentSprite {
 public:
 	TransparentSprite();
 	TransparentSprite(std::string fileName);
+	TransparentSprite(std::string fileName, float originX, float originY);
 	TransparentSprite(std::string hair, std::string head,
 		std::string shirt, std::string pants, std::string shoes);
 
@@ -32,15 +33,15 @@ public:
 	LevelBackground(std::string baseFile);
 	~LevelBackground();
 
-	void move(float x);
-	void draw(sf::RenderWindow window);
+	void move(float x, float wrapDelimiter);
+	void draw(sf::RenderWindow& window);
 private:
 	std::vector<TransparentSprite*> floorBackground;
 	std::vector<TransparentSprite*> wallBackground;
 	std::string baseTileFileName;
 
 	//Derived classes can change how new tile rows are added allowing downtown
-	virtual void appendTileRow();
+	virtual void appendTileRow(int index);
 	
 };
 
