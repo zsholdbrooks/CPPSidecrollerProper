@@ -32,6 +32,10 @@ int main()
     // And has the title "Hello from SFML"
     sf::RenderWindow window(sf::VideoMode(1280, 720), "CPP Sidescroller");
 
+    PauseMenu* pause = pause->getMenu();
+    sf::RenderTexture screenGrab;
+    screenGrab.create(1280, 720);
+
     sf::Sprite transDude;
     sf::Image dudeImg;
     sf::Texture transText;
@@ -68,16 +72,22 @@ int main()
     newMessage.setString("Quit to Menu");
     newMessage.setCharacterSize(30);
     newMessage.setFillColor(sf::Color::Red);
-    newMessage.setOrigin(130, 15);
+    newMessage.setOrigin(newMessage.getLocalBounds().width/2.0f, newMessage.getLocalBounds().height/2.0f);
     newMessage.setPosition(400, 400);
 
-    sf::RectangleShape outerRect;
-    outerRect.setOrigin(150, 30);
-    outerRect.setSize(sf::Vector2f(300, 60));
+    sf::RectangleShape outerRect(sf::Vector2f(300, 60));
+    outerRect.setOrigin(outerRect.getLocalBounds().width / 2.0f, outerRect.getLocalBounds().height / 2.0f);
     outerRect.setFillColor(sf::Color(150, 150, 150, 255));
     outerRect.setOutlineColor(sf::Color::Black);
     outerRect.setOutlineThickness(5);
     outerRect.setPosition(400, 400);
+
+    sf::RectangleShape screenOverlay;
+    //screenOverlay.setOrigin(150, 30);
+    screenOverlay.setSize(sf::Vector2f(1280, 720));
+    screenOverlay.setFillColor(sf::Color(100, 150, 100, 200));
+    screenOverlay.setOutlineColor(sf::Color::Black);
+    screenOverlay.setOutlineThickness(5);
     
     // Start Composite creation here
     sf::RenderTexture *comp = new sf::RenderTexture;
@@ -114,24 +124,6 @@ int main()
 
     compSprite.setPosition(200, 300);
 
-    // Create a "Text" object called "message". Weird but we will learn about objects soon
-    sf::Text message;
-
-    // We need to choose a font
-    sf::Font font;
-    font.loadFromFile("28 Days Later.ttf");
-
-    // Set the font to our message
-    message.setFont(font);
-
-    // Assign the actual message
-    message.setString("Fuq U");
-
-    // Make it really big
-    message.setCharacterSize(100);
-
-    // Choose a color
-    message.setFillColor(sf::Color::White);
 
 #if SINGLE_KEY_REP
     window.setKeyRepeatEnabled(false);
@@ -163,6 +155,13 @@ while (window.isOpen())
                 Right = true;
             }
             if (event.key.code == sf::Keyboard::LShift) LShift = 2;
+            if (event.key.code == sf::Keyboard::Escape) {
+                screenGrab.clear(sf::Color(100, 100, 100));
+                backing.draw(screenGrab);
+                screenGrab.draw(transDude);
+                screenGrab.display();
+                pause->startMenu(window, screenGrab.getTexture());
+            }
         }
         if (event.type == sf::Event::KeyReleased) {
             if (event.key.code == sf::Keyboard::Up) {
@@ -240,27 +239,23 @@ while (window.isOpen())
     }
         // Clear everything from the last run of the while loop
         //window.clear();
-    backing.move(-displacement*2 * deltaTime, 59 * -0);
-        window.draw(message);
+    backing.move(-displacement * deltaTime * LShift, 59 * -0);
 
-        window.clear(sf::Color(100, 100, 100));
+    window.clear(sf::Color(100, 100, 100));
 
-        // Draw our message
-        //window.draw(*floor.getSprite());
-        backing.draw(window);
-        //window.draw(dude);
-        window.draw(transDude);
-        window.draw(compSprite);
-        //window.draw(outerRect);
-        //window.draw(newMessage);
+    //window.draw(*floor.getSprite());
+    backing.draw(window);
+    //window.draw(dude);
+    window.draw(transDude);
+    //window.draw(compSprite);
+    //window.draw(outerRect);
+    //window.draw(newMessage);
 
-        
-        // Draw our game scene here
-        // Just a message for now
+    // Show everything we just drew
+    window.display();
 
-        // Show everything we just drew
-        window.display();
-    }// This is the end of the "while" loop
+    
+}// This is the end of the "while" loop
 
     return 0;
 }

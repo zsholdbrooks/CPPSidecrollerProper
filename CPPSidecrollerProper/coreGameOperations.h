@@ -4,6 +4,10 @@
 #include <SFML/Graphics.hpp>
 //#include <vector>
 
+#define RETURN_TO_GAME 101
+#define QUIT_TO_MENU 102
+#define QUIT_TO_DESKTOP 103
+
 class TransparentSprite {
 public:
 	TransparentSprite();
@@ -35,6 +39,7 @@ public:
 
 	void move(float x, float wrapDelimiter);
 	void draw(sf::RenderWindow& window);
+	void draw(sf::RenderTexture& texture);
 private:
 	std::vector<TransparentSprite*> floorBackground;
 	std::vector<TransparentSprite*> wallBackground;
@@ -48,8 +53,8 @@ private:
 
 class PauseMenu final {
 public:
-	static PauseMenu& getMenu();
-	int startMenu(sf::RenderWindow *window);
+	static PauseMenu *getMenu();
+	int startMenu(sf::RenderWindow& window, sf::Texture screenGrab);
 
 private:
 	PauseMenu();
