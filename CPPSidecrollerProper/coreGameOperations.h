@@ -20,6 +20,7 @@ public:
 
 	sf::Sprite *getSprite();
 	void loadNewTransparentTexture(std::string fileName);
+	void move(float x, float y);
 	bool intersection(sf::Sprite otherSprite);
 
 private:

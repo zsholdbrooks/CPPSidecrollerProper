@@ -65,7 +65,7 @@ TransparentSprite::TransparentSprite(std::string hair, std::string head, std::st
     sf::Sprite *pantsSprite = new sf::Sprite(*tempPantsTexture);
     sf::Sprite *shoesSprite = new sf::Sprite(*tempShoesTexture);
 
-    (*composite).clear();
+    (*composite).clear(sf::Color(200, 100, 50));
     (*composite).draw(*headSprite);
     (*composite).draw(*shirtSprite);
     (*composite).draw(*hairSprite);
@@ -74,7 +74,7 @@ TransparentSprite::TransparentSprite(std::string hair, std::string head, std::st
     (*composite).display();
 
     this->imageObj = new sf::Image((*composite).getTexture().copyToImage());
-    (*this->imageObj).createMaskFromColor(sf::Color(255, 255, 255), 0);
+    (*this->imageObj).createMaskFromColor(sf::Color(200, 100, 50), 0); //
 
     this->textureObj = new sf::Texture();
     (*this->textureObj).loadFromImage(*imageObj);
@@ -120,6 +120,10 @@ void TransparentSprite::loadNewTransparentTexture(std::string fileName) {
 
     (*(this->textureObj)).loadFromImage(*(this->imageObj));
     (*(this->spriteObj)).setTexture(*(this->textureObj));
+}
+
+void TransparentSprite::move(float x, float y) {
+    this->spriteObj->move(x, y);
 }
 
 bool TransparentSprite::intersection(sf::Sprite otherSprite) {

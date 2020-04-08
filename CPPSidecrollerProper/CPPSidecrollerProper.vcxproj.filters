@@ -16,6 +16,9 @@
     <Filter Include="Resource Files\DLLs">
       <UniqueIdentifier>{9831e7da-3067-410a-b50c-7e577b1e51aa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Pieces">
+      <UniqueIdentifier>{48371059-5ca3-4c6c-bf18-55ab5b3f181f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CPPSidescrollerProper.cpp">
@@ -92,6 +95,21 @@
     </Image>
     <Image Include="top.png">
       <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="body.png">
+      <Filter>Resource Files\Pieces</Filter>
+    </Image>
+    <Image Include="hair.png">
+      <Filter>Resource Files\Pieces</Filter>
+    </Image>
+    <Image Include="pants.png">
+      <Filter>Resource Files\Pieces</Filter>
+    </Image>
+    <Image Include="shirt.png">
+      <Filter>Resource Files\Pieces</Filter>
+    </Image>
+    <Image Include="shoes.png">
+      <Filter>Resource Files\Pieces</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
